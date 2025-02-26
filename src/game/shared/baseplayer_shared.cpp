@@ -854,6 +854,19 @@ bool CBasePlayer::Weapon_Switch( CBaseCombatWeapon *pWeapon, int viewmodelindex 
 		if ( pViewModel )
 			pViewModel->RemoveEffects( EF_NODRAW );
 		ResetAutoaim( );
+
+		#ifdef GAME_DLL
+		IGameEvent* pEvent = gameeventmanager->CreateEvent("weapon_switch");
+		if (pEvent)
+		{
+			pEvent->SetInt("userid", GetUserID());
+			pEvent->SetInt("new_weapon_index", pWeapon->entindex());
+			if (pLastWeapon)
+				pEvent->SetInt("old_weapon_index", pLastWeapon->entindex());
+			gameeventmanager->FireEvent(pEvent);
+		}
+		#endif
+
 		return true;
 	}
 	return false;
