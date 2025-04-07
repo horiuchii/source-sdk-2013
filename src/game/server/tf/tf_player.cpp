@@ -4082,6 +4082,7 @@ void CTFPlayer::Regenerate( bool bRefillHealthAndAmmo /*= true*/ )
 		if ( m_Shared.InCond( TF_COND_PARACHUTE_ACTIVE ) )
 		{
 			m_Shared.RemoveCond( TF_COND_PARACHUTE_ACTIVE );
+			m_Shared.RemoveCond( TF_COND_PARACHUTE_DEPLOYED );
 		}
 
 		if ( m_Shared.InCond( TF_COND_PLAGUE ) )
